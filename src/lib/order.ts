@@ -1,5 +1,12 @@
-export const WHATSAPP_NUMBER = import.meta.env.VITE_WHATSAPP_NUMBER || "27821234567";
-export const WHATSAPP_DISPLAY_NUMBER = import.meta.env.VITE_WHATSAPP_DISPLAY_NUMBER || "+27 82 123 4567";
+const configuredNumber = (import.meta.env.VITE_WHATSAPP_NUMBER || "").trim();
+
+export const ORDERING_AVAILABLE = /^[1-9]\d{7,14}$/.test(configuredNumber)
+  && configuredNumber !== "27821234567";
+export const WHATSAPP_NUMBER = ORDERING_AVAILABLE ? configuredNumber : "";
+const displayNumber = (import.meta.env.VITE_WHATSAPP_DISPLAY_NUMBER || "").trim();
+export const WHATSAPP_DISPLAY_NUMBER = ORDERING_AVAILABLE
+  ? (displayNumber.replace(/\D/g, "") === configuredNumber ? displayNumber : "+" + configuredNumber)
+  : "Ordering contact not configured";
 
 type OrderLine = {
   name: string;
@@ -23,6 +30,8 @@ export const createWhatsAppLink = ({
   intro = "Hi Sphe! I'd like to place an order.",
   includeCampusPrompt = true,
 }: OrderMessageOptions = {}) => {
+  if (!ORDERING_AVAILABLE) return "#ordering-unavailable";
+
   const orderLines = items.length
     ? items.map(formatOrderLine).join("\n")
     : "[Your order here]";

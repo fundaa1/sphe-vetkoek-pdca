@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { MessageCircle } from "lucide-react";
 import { Button } from "./ui/button";
-import { createWhatsAppLink } from "@/lib/order";
+import { createWhatsAppLink, ORDERING_AVAILABLE } from "@/lib/order";
 
 const navItems = [
   { label: "Menu", href: "#menu" },
@@ -41,13 +41,14 @@ const Header = () => {
           asChild
         >
           <a
+            aria-label={ORDERING_AVAILABLE ? "Order on WhatsApp" : "Ordering information"}
             href={createWhatsAppLink()}
-            target="_blank"
+            target={ORDERING_AVAILABLE ? "_blank" : undefined}
             rel="noopener noreferrer"
             className="flex items-center gap-2"
           >
             <MessageCircle className="w-4 h-4" />
-            <span className="hidden sm:inline">Order Now</span>
+            <span className="hidden sm:inline">{ORDERING_AVAILABLE ? "Order Now" : "Ordering info"}</span>
           </a>
         </Button>
       </div>

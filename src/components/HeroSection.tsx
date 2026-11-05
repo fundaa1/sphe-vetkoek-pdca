@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Clock, MapPin, MessageCircle, ShieldCheck, Truck } from "lucide-react";
 import { Button } from "./ui/button";
 import heroImage from "@/assets/hero-vetkoek.jpg";
-import { createWhatsAppLink } from "@/lib/order";
+import { createWhatsAppLink, ORDERING_AVAILABLE } from "@/lib/order";
 
 const trustBadges = [
   { icon: ShieldCheck, label: "Made fresh daily" },
@@ -64,12 +64,12 @@ const HeroSection = () => {
                 href={createWhatsAppLink({
                   intro: "Hi Sphe! I saw the website and I'd like to order vetkoeks.",
                 })}
-                target="_blank"
+                target={ORDERING_AVAILABLE ? "_blank" : undefined}
                 rel="noopener noreferrer"
                 className="flex items-center gap-3"
               >
                 <MessageCircle className="w-6 h-6" />
-                Order on WhatsApp
+                {ORDERING_AVAILABLE ? "Order on WhatsApp" : "Ordering information"}
               </a>
             </Button>
             <Button

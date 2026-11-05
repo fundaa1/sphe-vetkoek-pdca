@@ -1,5 +1,7 @@
 # Sphe's Vetkoeks
 
+Workshop status and preview: [WORKSHOP-HANDOFF.md](WORKSHOP-HANDOFF.md). Ordering stays unavailable until a valid business WhatsApp number is configured and verified.
+
 A Vite, React, TypeScript, shadcn/ui, and Tailwind CSS landing page for Sphe's Vetkoeks.
 
 ## Local Development
@@ -61,7 +63,7 @@ This repo includes `netlify.toml` so Netlify uses the correct build command, pub
 
 ## Important Before Showcasing
 
-The WhatsApp order links use placeholder values unless environment variables are configured.
+The WhatsApp order links show an ordering notice unless a valid number is configured. The example number is rejected.
 
 Copy `.env.example` to `.env.local` for local development, then set:
 

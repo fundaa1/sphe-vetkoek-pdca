@@ -1,5 +1,5 @@
 import { Clock, MapPin, MessageCircle } from "lucide-react";
-import { WHATSAPP_DISPLAY_NUMBER, createWhatsAppLink } from "@/lib/order";
+import { WHATSAPP_DISPLAY_NUMBER, createWhatsAppLink, ORDERING_AVAILABLE } from "@/lib/order";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -31,7 +31,7 @@ const Footer = () => {
               <li>
                 <a
                   href={createWhatsAppLink({ intro: "Hi Sphe! I have a question about ordering vetkoeks." })}
-                  target="_blank"
+                  target={ORDERING_AVAILABLE ? "_blank" : undefined}
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 text-background/70 hover:text-primary transition-colors"
                 >

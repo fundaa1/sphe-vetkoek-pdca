@@ -4,7 +4,7 @@ import { Button } from "./ui/button";
 import vetkoekPlain from "@/assets/vetkoek-plain.jpg";
 import vetkoekPolony from "@/assets/vetkoek-polony.jpg";
 import vetkoekCheesePolony from "@/assets/vetkoek-cheese-polony.jpg";
-import { createWhatsAppLink } from "@/lib/order";
+import { createWhatsAppLink, ORDERING_AVAILABLE } from "@/lib/order";
 
 interface MenuItem {
   id: number;
@@ -131,7 +131,7 @@ const MenuSection = () => {
                   >
                     <a
                       href={createWhatsAppLink({ items: [{ name: item.name, price: item.price, quantity: 1 }] })}
-                      target="_blank"
+                      target={ORDERING_AVAILABLE ? "_blank" : undefined}
                       rel="noopener noreferrer"
                       className="flex items-center gap-2"
                     >
@@ -146,7 +146,7 @@ const MenuSection = () => {
                   >
                     <a
                       href={createWhatsAppLink({ items: [{ name: item.name, price: item.price, quantity: 2 }] })}
-                      target="_blank"
+                      target={ORDERING_AVAILABLE ? "_blank" : undefined}
                       rel="noopener noreferrer"
                       className="flex items-center gap-2"
                     >
