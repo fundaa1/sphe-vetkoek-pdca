@@ -18,6 +18,8 @@ type OrderMessageOptions = {
   items?: OrderLine[];
   intro?: string;
   includeCampusPrompt?: boolean;
+  deliveryAddress?: string;
+  preferredTime?: string;
 };
 
 const formatOrderLine = ({ name, price, quantity = 1 }: OrderLine) => {
@@ -29,6 +31,8 @@ export const createWhatsAppLink = ({
   items = [],
   intro = "Hi Sphe! I'd like to place an order.",
   includeCampusPrompt = true,
+  deliveryAddress = "",
+  preferredTime = "",
 }: OrderMessageOptions = {}) => {
   if (!ORDERING_AVAILABLE) return "#ordering-unavailable";
 
@@ -41,7 +45,7 @@ export const createWhatsAppLink = ({
   const campusLine = includeCampusPrompt ? "\nCampus/residence: [UKZN / residence / area]" : "";
 
   const message = encodeURIComponent(
-    `${intro}\n\n${orderLines}${totalLine}${campusLine}\nDelivery address: [Your address]\nPreferred time: [Now / later]`,
+    `${intro}\n\n${orderLines}${totalLine}${campusLine}\nDelivery address: ${deliveryAddress.trim() || "[Your address]"}\nPreferred time: ${preferredTime.trim() || "[Now / later]"}`,
   );
 
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;

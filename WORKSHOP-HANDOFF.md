@@ -50,3 +50,14 @@ Default `npm ci` failed because the inherited lockfile lacks peer packages under
 - Enforce: verify the recipient and each entry point after contact configuration changes, without sending test messages unless authorised.
 - Improve: confirm pricing and fulfilment details before public deployment. Existing delivery and testimonial claims remain unverified.
 - Work: Codex implemented and checked the change. No work was delegated.
+## Delivery details improvement cycle
+
+- Plan: let visitors add delivery details to a mixed order before reviewing the WhatsApp draft.
+- Do: add optional area or address and preferred-time fields to the mixed-order summary and include them in the encoded draft.
+- Check: browser inspection confirmed sample values and the estimated total appear in the generated link, and Clear order cleared the sample. The order helper test covers special characters and blank defaults. The real WhatsApp handoff was not exercised and no message was sent.
+- Act: commissioner reviews the flow and confirms delivery terms and prices.
+- Standardise: fields and quantities exist only in page state and are cleared together. Entered details are included in the WhatsApp link when the visitor opens it; the visitor reviews and sends the message in WhatsApp. A blank field retains a prompt for completion.
+- Train: select products, optionally fill in area and time, then choose Review in WhatsApp.
+- Enforce: verify encoding, blank values, clear behavior, recipient and browser flow before acceptance.
+- Improve: confirm actual fulfilment and delivery charges before public launch.
+- Work: Codex implemented and checked this change. No work was delegated.

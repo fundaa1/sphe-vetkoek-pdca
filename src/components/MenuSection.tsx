@@ -49,6 +49,8 @@ const menuItems: MenuItem[] = [
 
 const MenuSection = () => {
   const [quantities, setQuantities] = useState<Record<number, number>>({});
+  const [deliveryAddress, setDeliveryAddress] = useState("");
+  const [preferredTime, setPreferredTime] = useState("");
   const items = menuItems
     .filter(item => (quantities[item.id] || 0) > 0)
     .map(item => ({ name: item.name, price: item.price, quantity: quantities[item.id] }));
@@ -193,13 +195,24 @@ const MenuSection = () => {
                 ))}
               </ul>
               <p className="mt-5 font-bold text-lg" aria-live="polite">Estimated total: R{total}</p>
+              <div className="grid sm:grid-cols-2 gap-4 mt-5">
+                <label className="font-semibold text-sm">
+                  Delivery area or address (optional)
+                  <input className="block w-full mt-2 rounded-md border border-border bg-background px-3 py-2 font-normal" value={deliveryAddress} maxLength={200} onChange={event => setDeliveryAddress(event.target.value)} placeholder="Campus, residence or address" />
+                </label>
+                <label className="font-semibold text-sm">
+                  Preferred time (optional)
+                  <input className="block w-full mt-2 rounded-md border border-border bg-background px-3 py-2 font-normal" value={preferredTime} maxLength={100} onChange={event => setPreferredTime(event.target.value)} placeholder="e.g. today at 13:00" />
+                </label>
+              </div>
+              <p className="text-sm text-muted-foreground mt-3">These details are included in the WhatsApp draft. Review the message before sending.</p>
               <div className="flex flex-wrap gap-3 mt-5">
                 <Button variant="whatsapp" asChild>
-                  <a href={createWhatsAppLink({ items })} target={ORDERING_AVAILABLE ? "_blank" : undefined} rel="noopener noreferrer">
+                  <a href={createWhatsAppLink({ items, deliveryAddress, preferredTime, includeCampusPrompt: !deliveryAddress.trim() })} target={ORDERING_AVAILABLE ? "_blank" : undefined} rel="noopener noreferrer">
                     {ORDERING_AVAILABLE ? "Review in WhatsApp" : "Ordering information"}
                   </a>
                 </Button>
-                <Button variant="outline" type="button" onClick={() => setQuantities({})}>Clear order</Button>
+                <Button variant="outline" type="button" onClick={() => { setQuantities({}); setDeliveryAddress(""); setPreferredTime(""); }}>Clear order</Button>
               </div>
             </>
           )}

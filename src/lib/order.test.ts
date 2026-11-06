@@ -60,4 +60,18 @@ describe("WhatsApp order destination", () => {
     expect(message).toContain("1 x Vetkoek with Polony - R13");
     expect(message).toContain("Estimated total: R33");
   });
+
+  it("encodes optional delivery details while keeping blank defaults", async () => {
+    vi.stubEnv("VITE_WHATSAPP_NUMBER", "27123456789");
+    const order = await import("./order");
+    const url = new URL(order.createWhatsAppLink({
+      items: [{ name: "Vetkoek Plain", price: 10, quantity: 1 }],
+      deliveryAddress: "  Gate A & B  ",
+      preferredTime: "13:00 #2",
+    }));
+    expect(url.searchParams.get("text")).toContain("Delivery address: Gate A & B");
+    expect(url.searchParams.get("text")).toContain("Preferred time: 13:00 #2");
+    expect(new URL(order.createWhatsAppLink()).searchParams.get("text"))
+      .toContain("Delivery address: [Your address]");
+  });
 });
