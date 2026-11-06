@@ -1,6 +1,6 @@
 # Sphe's Vetkoeks
 
-Workshop status and preview: [WORKSHOP-HANDOFF.md](WORKSHOP-HANDOFF.md). Ordering stays unavailable until a valid business WhatsApp number is configured and verified.
+Workshop status and preview: [WORKSHOP-HANDOFF.md](WORKSHOP-HANDOFF.md). Ordering links use the business WhatsApp number supplied by the commissioner. Check the handoff before deployment.
 
 A Vite, React, TypeScript, shadcn/ui, and Tailwind CSS landing page for Sphe's Vetkoeks.
 
@@ -63,9 +63,9 @@ This repo includes `netlify.toml` so Netlify uses the correct build command, pub
 
 ## Important Before Showcasing
 
-The WhatsApp order links show an ordering notice unless a valid number is configured. The example number is rejected.
+The WhatsApp order links use +27 83 124 5678 by default. An empty or invalid override shows an ordering notice. The old example number is rejected.
 
 Copy `.env.example` to `.env.local` for local development, then set:
 
-- `VITE_WHATSAPP_NUMBER`: international format without `+`, for example `27821234567`
-- `VITE_WHATSAPP_DISPLAY_NUMBER`: human-readable format, for example `+27 82 123 4567`
+- `VITE_WHATSAPP_NUMBER`: international format without `+`, for example `27831245678`
+- `VITE_WHATSAPP_DISPLAY_NUMBER`: human-readable format, for example `+27 83 124 5678`

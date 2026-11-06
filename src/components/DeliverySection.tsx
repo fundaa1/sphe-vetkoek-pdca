@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Clock, MapPin, Truck, CreditCard } from "lucide-react";
+import { ORDERING_AVAILABLE } from "@/lib/order";
 
 const deliveryInfo = [
   {
@@ -42,7 +43,9 @@ const DeliverySection = () => {
             How It Works
           </h2>
           <p className="text-muted-foreground text-lg max-w-xl mx-auto">
-            Ordering is simple: choose your vetkoek, confirm on WhatsApp, then meet at your residence, campus gate, or pickup point.
+            {ORDERING_AVAILABLE
+              ? "Choose an item or build a mixed order. Review the prepared WhatsApp message, add your delivery details, and send it to confirm availability and delivery."
+              : "Ordering details are being updated. You can still explore the menu and prepare a mixed order."}
           </p>
         </motion.div>
 
@@ -84,21 +87,21 @@ const DeliverySection = () => {
               <span className="w-10 h-10 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-heading font-bold">
                 1
               </span>
-              <span className="text-foreground font-medium">Click WhatsApp</span>
+              <span className="text-foreground font-medium">Choose items</span>
             </div>
             <div className="hidden md:block w-8 h-0.5 bg-border" />
             <div className="flex items-center gap-3">
               <span className="w-10 h-10 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-heading font-bold">
                 2
               </span>
-              <span className="text-foreground font-medium">Send your order</span>
+              <span className="text-foreground font-medium">Review and send on WhatsApp</span>
             </div>
             <div className="hidden md:block w-8 h-0.5 bg-border" />
             <div className="flex items-center gap-3">
               <span className="w-10 h-10 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-heading font-bold">
                 3
               </span>
-              <span className="text-foreground font-medium">Get it delivered!</span>
+              <span className="text-foreground font-medium">Confirm delivery details</span>
             </div>
           </div>
         </motion.div>

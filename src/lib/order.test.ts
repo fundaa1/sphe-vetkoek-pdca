@@ -6,6 +6,15 @@ afterEach(() => {
 });
 
 describe("WhatsApp order destination", () => {
+  it("uses the provided business number when no override is set", async () => {
+    vi.stubEnv("VITE_WHATSAPP_NUMBER", undefined);
+    vi.stubEnv("VITE_WHATSAPP_DISPLAY_NUMBER", undefined);
+    const order = await import("./order");
+    expect(order.ORDERING_AVAILABLE).toBe(true);
+    expect(order.WHATSAPP_DISPLAY_NUMBER).toBe("+27 83 124 5678");
+    expect(new URL(order.createWhatsAppLink()).pathname).toBe("/27831245678");
+  });
+
   it.each(["", "27821234567", "+27 82 123 4567", "123"])(
     "routes an unset or invalid number to the notice",
     async (number) => {

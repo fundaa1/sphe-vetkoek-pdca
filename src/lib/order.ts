@@ -1,9 +1,9 @@
-const configuredNumber = (import.meta.env.VITE_WHATSAPP_NUMBER || "").trim();
+const configuredNumber = (import.meta.env.VITE_WHATSAPP_NUMBER ?? "27831245678").trim();
 
 export const ORDERING_AVAILABLE = /^[1-9]\d{7,14}$/.test(configuredNumber)
   && configuredNumber !== "27821234567";
 export const WHATSAPP_NUMBER = ORDERING_AVAILABLE ? configuredNumber : "";
-const displayNumber = (import.meta.env.VITE_WHATSAPP_DISPLAY_NUMBER || "").trim();
+const displayNumber = (import.meta.env.VITE_WHATSAPP_DISPLAY_NUMBER ?? "+27 83 124 5678").trim();
 export const WHATSAPP_DISPLAY_NUMBER = ORDERING_AVAILABLE
   ? (displayNumber.replace(/\D/g, "") === configuredNumber ? displayNumber : "+" + configuredNumber)
   : "Ordering contact not configured";
