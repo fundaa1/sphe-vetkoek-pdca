@@ -1,5 +1,6 @@
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { MessageCircle } from "lucide-react";
+import { Menu, MessageCircle, X } from "lucide-react";
 import { Button } from "./ui/button";
 import { createWhatsAppLink, ORDERING_AVAILABLE } from "@/lib/order";
 
@@ -10,6 +11,21 @@ const navItems = [
 ];
 
 const Header = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuButton = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setMenuOpen(false);
+        menuButton.current?.focus();
+      }
+    };
+    window.addEventListener("keydown", closeOnEscape);
+    return () => window.removeEventListener("keydown", closeOnEscape);
+  }, [menuOpen]);
+
   return (
     <motion.header
       initial={{ y: -20, opacity: 0 }}
@@ -35,6 +51,7 @@ const Header = () => {
           ))}
         </nav>
 
+        <div className="flex items-center gap-2">
         <Button
           variant="whatsapp"
           size="sm"
@@ -51,7 +68,28 @@ const Header = () => {
             <span className="hidden sm:inline">{ORDERING_AVAILABLE ? "Order Now" : "Ordering info"}</span>
           </a>
         </Button>
+        <button
+          ref={menuButton}
+          type="button"
+          className="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-md text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary"
+          aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
+          aria-expanded={menuOpen}
+          aria-controls="mobile-navigation"
+          onClick={() => setMenuOpen(open => !open)}
+        >
+          {menuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
+        </button>
+        </div>
       </div>
+      <nav id="mobile-navigation" aria-label="Mobile navigation" hidden={!menuOpen} className="md:hidden border-t border-border bg-background px-4 py-3">
+        <div className="container mx-auto flex flex-col">
+          {navItems.map(item => (
+            <a key={item.href} href={item.href} onClick={() => setMenuOpen(false)} className="rounded-md px-3 py-3 font-medium text-foreground hover:bg-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary">
+              {item.label}
+            </a>
+          ))}
+        </div>
+      </nav>
     </motion.header>
   );
 };

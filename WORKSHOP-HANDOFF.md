@@ -73,3 +73,15 @@ Default `npm ci` failed because the inherited lockfile lacks peer packages under
 - Enforce: review business-provided details before presenting them as current facts.
 - Improve: confirm remaining inherited product descriptions, claims, testimonials and pricing before public launch.
 - Work: Codex implemented and verified this change. No work was delegated; commissioner acceptance is pending.
+
+## Mobile navigation cycle
+
+- Plan: provide access to the Menu, How It Works and Story sections on small screens.
+- Do: add a labelled mobile menu with an expanded state, section links and Escape dismissal.
+- Check: production build, TypeScript, ten automated tests and whitespace checks passed. In the browser, the menu opened, Escape closed it and returned focus to the control, and How It Works navigated and closed the menu. Commissioner acceptance remains pending.
+- Act: invite commissioner review on a phone.
+- Standardise: desktop links remain available at the existing breakpoint; the mobile menu closes when a link is selected.
+- Train: choose the menu icon on a narrow screen, then select a section or press Escape.
+- Enforce: check keyboard and touch navigation when modifying the header.
+- Improve: add a clear way to reach the mixed-order summary after selecting items on a phone. Confirm actual business details before public launch.
+- Work: Codex implemented and checked the change. No work was delegated.
