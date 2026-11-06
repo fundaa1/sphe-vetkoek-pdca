@@ -55,6 +55,7 @@ const MenuSection = () => {
     .filter(item => (quantities[item.id] || 0) > 0)
     .map(item => ({ name: item.name, price: item.price, quantity: quantities[item.id] }));
   const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const itemCount = items.reduce((sum, item) => sum + item.quantity, 0);
 
   const changeQuantity = (id: number, change: number) => {
     setQuantities(previous => ({
@@ -144,6 +145,11 @@ const MenuSection = () => {
                   <span aria-live="polite">{quantities[item.id] || 0} selected</span>
                   <button type="button" className="border border-border rounded-md px-3 py-1 text-lg" aria-label={`Add one ${item.name}`} disabled={quantities[item.id] >= 99} onClick={() => changeQuantity(item.id, 1)}>+</button>
                 </div>
+                {itemCount > 0 && (
+                  <a href="#order-summary" className="inline-block mb-4 text-sm font-semibold text-accent underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+                    Review order ({itemCount} {itemCount === 1 ? "item" : "items"})
+                  </a>
+                )}
                 <div className="grid grid-cols-2 gap-3">
                   <Button
                     variant="whatsapp"
@@ -180,7 +186,7 @@ const MenuSection = () => {
             </motion.div>
           ))}
         </div>
-        <section className="max-w-5xl mx-auto mt-12 p-6 sm:p-8 bg-card rounded-2xl shadow-card" aria-labelledby="order-summary-title">
+        <section id="order-summary" tabIndex={-1} className="scroll-mt-24 max-w-5xl mx-auto mt-12 p-6 sm:p-8 bg-card rounded-2xl shadow-card" aria-labelledby="order-summary-title">
           <h3 id="order-summary-title" className="font-heading text-2xl font-bold">Your mixed order</h3>
           <p className="text-muted-foreground mt-2">Choose quantities above. The total is an estimate and excludes any delivery charge.</p>
           {items.length === 0 ? (

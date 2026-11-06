@@ -85,3 +85,15 @@ Default `npm ci` failed because the inherited lockfile lacks peer packages under
 - Enforce: check keyboard and touch navigation when modifying the header.
 - Improve: add a clear way to reach the mixed-order summary after selecting items on a phone. Confirm actual business details before public launch.
 - Work: Codex implemented and checked the change. No work was delegated.
+
+## Order-review shortcut cycle
+
+- Plan: help customers reach the mixed-order summary without scrolling past every menu item.
+- Do: show a Review order link with the total item count on each menu card when an item is selected. The link targets the focusable summary.
+- Check: production build, TypeScript, ten automated tests and whitespace checks passed. In the browser, selecting an item showed the shortcut, following it focused the summary with the selection intact, and clearing the order removed the shortcut. Commissioner acceptance is pending.
+- Act: review the shortcut on a phone with the commissioner.
+- Standardise: the shortcut appears only for a non-empty mixed order; it does not open WhatsApp or submit the order.
+- Train: add an item, choose Review order, then review the summary and delivery details.
+- Enforce: check selection, count, keyboard focus, navigation and clearing when changing the order interface.
+- Improve: make the distinction between one-item quick-order buttons and the mixed-order builder clearer, so customers understand which selection will be included in a WhatsApp draft.
+- Work: Codex implemented and verified the change. No work was delegated.
