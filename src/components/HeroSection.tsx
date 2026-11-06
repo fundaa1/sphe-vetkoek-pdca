@@ -6,7 +6,7 @@ import { createWhatsAppLink, ORDERING_AVAILABLE } from "@/lib/order";
 
 const trustBadges = [
   { icon: ShieldCheck, label: "Made fresh daily" },
-  { icon: Clock, label: "30-45 min delivery" },
+  { icon: Clock, label: "Confirm delivery time" },
   { icon: MapPin, label: "Campus friendly" },
 ];
 

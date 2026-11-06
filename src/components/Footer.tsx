@@ -41,7 +41,7 @@ const Footer = () => {
               </li>
               <li className="flex items-center gap-3 text-background/70">
                 <MapPin className="w-4 h-4" />
-                <span>UKZN, Durban & nearby residences</span>
+                <span>Ask about delivery or collection</span>
               </li>
             </ul>
           </div>
@@ -52,15 +52,7 @@ const Footer = () => {
             <ul className="space-y-2 text-background/70 text-sm">
               <li className="flex items-center gap-3">
                 <Clock className="w-4 h-4" />
-                <span>Mon - Fri: 10am - 6pm</span>
-              </li>
-              <li className="flex items-center gap-3">
-                <Clock className="w-4 h-4" />
-                <span>Saturday: 11am - 4pm</span>
-              </li>
-              <li className="flex items-center gap-3">
-                <Clock className="w-4 h-4" />
-                <span>Sunday: Closed</span>
+                <span>Confirm current hours on WhatsApp</span>
               </li>
             </ul>
           </div>

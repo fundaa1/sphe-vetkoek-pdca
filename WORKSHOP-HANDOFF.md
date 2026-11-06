@@ -61,3 +61,15 @@ Default `npm ci` failed because the inherited lockfile lacks peer packages under
 - Enforce: verify encoding, blank values, clear behavior, recipient and browser flow before acceptance.
 - Improve: confirm actual fulfilment and delivery charges before public launch.
 - Work: Codex implemented and checked this change. No work was delegated.
+
+## Ordering-information clarification cycle
+
+- Plan: make clear which ordering and fulfilment details still need confirmation.
+- Do: replace unverified availability, delivery-time, delivery-area, hours and payment assertions in the menu, hero, delivery section and footer with prompts to confirm them via WhatsApp.
+- Check: production build, TypeScript, ten automated tests and whitespace checks passed. Browser inspection confirmed the updated labels and the configured WhatsApp links. No message was sent.
+- Act: the commissioner can supply confirmed hours, areas, timing and payment methods for a future update.
+- Standardise: menu prices remain estimates and availability is confirmed with the business. Existing source details remain in Git history, but were not verified as current.
+- Train: select an order and use the WhatsApp draft to ask about fulfilment and payment.
+- Enforce: review business-provided details before presenting them as current facts.
+- Improve: confirm remaining inherited product descriptions, claims, testimonials and pricing before public launch.
+- Work: Codex implemented and verified this change. No work was delegated; commissioner acceptance is pending.

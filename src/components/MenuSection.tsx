@@ -136,7 +136,7 @@ const MenuSection = () => {
                     R{item.price}
                   </span>
                   <span className="rounded-full bg-muted px-3 py-1 text-xs font-semibold text-muted-foreground">
-                    Available today
+                    Confirm availability
                   </span>
                 </div>
                 <div className="flex items-center justify-between gap-3 mb-4" role="group" aria-label={`Quantity for ${item.name}`}>

@@ -6,22 +6,22 @@ const deliveryInfo = [
   {
     icon: MapPin,
     title: "Delivery Area",
-    description: "UKZN Howard College, Westville Campus & surrounding areas",
+    description: "Share your location on WhatsApp to confirm delivery or collection options.",
   },
   {
     icon: Clock,
     title: "Operating Hours",
-    description: "Monday - Friday: 10am - 6pm, Saturday: 11am - 4pm",
+    description: "Ask on WhatsApp to confirm current ordering hours.",
   },
   {
     icon: Truck,
     title: "Delivery Time",
-    description: "30-45 minutes from order confirmation",
+    description: "Confirm the estimated time and any delivery charge with your order.",
   },
   {
     icon: CreditCard,
     title: "Payment",
-    description: "Cash on delivery or EFT/SnapScan",
+    description: "Confirm the available payment options on WhatsApp.",
   },
 ];
 
