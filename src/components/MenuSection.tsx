@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { MessageCircle, Plus, Star } from "lucide-react";
 import { Button } from "./ui/button";
@@ -47,6 +48,19 @@ const menuItems: MenuItem[] = [
 ];
 
 const MenuSection = () => {
+  const [quantities, setQuantities] = useState<Record<number, number>>({});
+  const items = menuItems
+    .filter(item => (quantities[item.id] || 0) > 0)
+    .map(item => ({ name: item.name, price: item.price, quantity: quantities[item.id] }));
+  const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+  const changeQuantity = (id: number, change: number) => {
+    setQuantities(previous => ({
+      ...previous,
+      [id]: Math.min(99, Math.max(0, (previous[id] || 0) + change)),
+    }));
+  };
+
   return (
     <section id="menu" className="py-20 bg-background">
       <div className="container mx-auto px-4">
@@ -64,7 +78,7 @@ const MenuSection = () => {
             Pick Your Vetkoek
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Fresh from the pot, straight to your door. Choose one item or send a quick quantity order on WhatsApp.
+            Choose a quick order or build a mixed order below. Prices and availability are subject to confirmation.
           </p>
         </motion.div>
 
@@ -123,6 +137,11 @@ const MenuSection = () => {
                     Available today
                   </span>
                 </div>
+                <div className="flex items-center justify-between gap-3 mb-4" role="group" aria-label={`Quantity for ${item.name}`}>
+                  <button type="button" className="border border-border rounded-md px-3 py-1 text-lg" aria-label={`Remove one ${item.name}`} disabled={!quantities[item.id]} onClick={() => changeQuantity(item.id, -1)}>−</button>
+                  <span aria-live="polite">{quantities[item.id] || 0} selected</span>
+                  <button type="button" className="border border-border rounded-md px-3 py-1 text-lg" aria-label={`Add one ${item.name}`} disabled={quantities[item.id] >= 99} onClick={() => changeQuantity(item.id, 1)}>+</button>
+                </div>
                 <div className="grid grid-cols-2 gap-3">
                   <Button
                     variant="whatsapp"
@@ -159,6 +178,32 @@ const MenuSection = () => {
             </motion.div>
           ))}
         </div>
+        <section className="max-w-5xl mx-auto mt-12 p-6 sm:p-8 bg-card rounded-2xl shadow-card" aria-labelledby="order-summary-title">
+          <h3 id="order-summary-title" className="font-heading text-2xl font-bold">Your mixed order</h3>
+          <p className="text-muted-foreground mt-2">Choose quantities above. The total is an estimate and excludes any delivery charge.</p>
+          {items.length === 0 ? (
+            <p className="mt-5 text-muted-foreground">No items selected yet.</p>
+          ) : (
+            <>
+              <ul className="mt-5 space-y-2">
+                {items.map(item => (
+                  <li key={item.name} className="flex justify-between gap-4">
+                    <span>{item.quantity} × {item.name}</span><span>R{item.price * item.quantity}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-5 font-bold text-lg" aria-live="polite">Estimated total: R{total}</p>
+              <div className="flex flex-wrap gap-3 mt-5">
+                <Button variant="whatsapp" asChild>
+                  <a href={createWhatsAppLink({ items })} target={ORDERING_AVAILABLE ? "_blank" : undefined} rel="noopener noreferrer">
+                    {ORDERING_AVAILABLE ? "Review in WhatsApp" : "Ordering information"}
+                  </a>
+                </Button>
+                <Button variant="outline" type="button" onClick={() => setQuantities({})}>Clear order</Button>
+              </div>
+            </>
+          )}
+        </section>
       </div>
     </section>
   );

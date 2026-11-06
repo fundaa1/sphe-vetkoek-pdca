@@ -26,3 +26,15 @@ When configured, an order link opens WhatsApp with an encoded draft and calculat
 ## Maintenance and reuse
 
 Default `npm ci` failed because the inherited lockfile lacks peer packages under the installed npm version. `npm ci --legacy-peer-deps` succeeded; resolve and validate the lockfile separately before changing install policy. Installation emitted install-script warnings and the build reported old Browserslist data. No live site was deployed. Inspect source licensing and image rights before reuse; no license grant was verified in this work.
+
+## Mixed-order improvement cycle
+
+- Plan: allow visitors to prepare a mixed order and see an estimated total.
+- Do: add per-item quantity controls, a summary, clear action and a draft link that uses the existing WhatsApp destination guard.
+- Check: production build and TypeScript check passed. In the browser, two plain and one polony produced R33; removing one plain produced R23, and clearing returned to the empty state. A mixed-message unit check verifies both lines and total. The actual WhatsApp handoff was not exercised because the business number is not configured. Commissioner acceptance is pending.
+- Act: confirm menu, prices, delivery charges and business contact before accepting real orders.
+- Standardise: quantities range from 0 to 99 per item, exist only while the page is open and are cleared on reload. The estimate excludes delivery and is subject to business confirmation. The visitor must review and send any WhatsApp message themselves.
+- Train: add items with the plus controls, adjust with minus, review the summary and clear when finished.
+- Enforce: run tests, production build, TypeScript check and a browser walkthrough before acceptance.
+- Improve: consider persistence, confirmed prices and delivery calculations after the operating model is agreed.
+- Work: Codex implemented and checked the change. No work was delegated.

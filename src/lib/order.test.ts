@@ -36,4 +36,19 @@ describe("WhatsApp order destination", () => {
     const order = await import("./order");
     expect(order.WHATSAPP_DISPLAY_NUMBER).toBe("+27123456789");
   });
+
+  it("includes each item and the combined total in a mixed-order draft", async () => {
+    vi.stubEnv("VITE_WHATSAPP_NUMBER", "27123456789");
+    const order = await import("./order");
+    const url = new URL(order.createWhatsAppLink({
+      items: [
+        { name: "Vetkoek Plain", price: 10, quantity: 2 },
+        { name: "Vetkoek with Polony", price: 13, quantity: 1 },
+      ],
+    }));
+    const message = url.searchParams.get("text");
+    expect(message).toContain("2 x Vetkoek Plain - R20");
+    expect(message).toContain("1 x Vetkoek with Polony - R13");
+    expect(message).toContain("Estimated total: R33");
+  });
 });
